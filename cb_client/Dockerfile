@@ -98,12 +98,17 @@ cd /tmp &&\
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&\
 dpkg -i google-chrome-stable_current_amd64.deb;\
 fi
-# Build
-##RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
-##export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true;\
-##fi &&\
-##npm install -g typescript @types/node &&\
-##npm install
+COPY package.json .
+
+# Bundle app source
+COPY . .
+
+#Build
+RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true;\
+fi &&\
+npm install -g typescript @types/node &&\
+npm install
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /var/log/chaturbae/
@@ -126,10 +131,7 @@ ENTRYPOINT ["dumb-init", "--"]
 #CMD [ "node", "cb_client.js" ]
 #RUN screen -dmS super /usr/bin/supervisord -n
 # Install app dependencies
-COPY package.json .
 
-# Bundle app source
-COPY . .
 
 RUN npm install
 
