@@ -1,6 +1,6 @@
 version: '2'
 services:
-  cb_client:
+  cb-client:
     image: patt1293/chaturbae-client:latest
     environment:
       CB_USERNAME: "${CB_USERNAME}"
