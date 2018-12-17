@@ -6,5 +6,5 @@ services:
       CB_USERNAME: "${CB_USERNAME}"
       AWSKEY: "${AWSKEY}"
       AWSSECRET: "${AWSSECRET}"
-      SERVICE_IP: "10.10.1.30"
+      SERVICE_IP: "172.26.13.67"
       DEBUG: "chaturbae:*"
