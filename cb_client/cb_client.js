@@ -14,11 +14,11 @@ var ai_debug = require('debug')('chaturbae:ai')
 // username of the room to monitor
 //const USERNAME = 'aslytaylor_';
 var USERNAME = process.env.CB_USERNAME;
-var accessKeyId = process.env.AWSKEY
-var secretAccessKey = process.env.AWSSECRET
+var AWSKEY = process.env.AWSKEY
+var AWSSECRET = process.env.AWSSECRET
 //var USERNAME = process.argv[2];
 console.log(USERNAME);
-AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
+AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
