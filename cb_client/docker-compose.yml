@@ -1,0 +1,10 @@
+version: '2'
+services:
+  cb_client:
+    image: patt1293/chaturbae-client:latest
+    environment:
+      CB_USERNAME: "${CB_USERNAME}"
+      AWSKEY: "${AWSKEY}"
+      AWSSECRET: "${AWSSECRET}"
+      SERVICE_IP: "10.10.1.30"
+      DEBUG: "chaturbae:*"
