@@ -133,7 +133,7 @@ ENTRYPOINT ["dumb-init", "--"]
 # Install app dependencies
 
 
-RUN npm install
+RUN npm install -g
 
 CMD bash entrypoint.sh
 #CMD tail -f /dev/null
