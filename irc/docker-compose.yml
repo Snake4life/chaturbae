@@ -1,14 +1,12 @@
 version: '2'
 services:
-  irc_worker:
+  irc-worker:
     image: patt1293/chaturbae-irc
-  nsfw_api:
+    ports:
+      - "8081:8081"
+  nsfw-api:
     image: eugencepoi/nsfw_api
     environment:
       PORT: "5000"
     ports:
       - "5000:5000"
-networks:
-  default:
-    external:
-      name: frontend

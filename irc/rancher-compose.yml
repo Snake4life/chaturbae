@@ -1,8 +1,8 @@
 version: '2'
 services:
-  irc_worker:
+  irc-worker:
     scale: 1
     start_on_create: true
-  nsfw_api:
+  nsfw-api:
     scale: 1
     start_on_create: true
