@@ -33,8 +33,6 @@ console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
-
-  server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
   server_debug ('connected to cb_server at http://localhost:8080')
   // tell the backend to load this profile
