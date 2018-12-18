@@ -33,7 +33,7 @@ var config = {
   sasl:true,
   userName: "whackin_it-bot",
   password: "randompassword123",
-	channels: ["#codejungle"],
+	channels: ["#chaturbae"],
 	server: "irc.freenode.net",
 	nick: "whackin_it-bot"
 };
