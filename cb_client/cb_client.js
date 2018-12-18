@@ -97,7 +97,7 @@ var firstNaked = 0;
 setInterval(function() {
   if(inRoom){
     var spawn = require('child_process').spawn;
-    var datetime = new Date().toISOString().split(":").join("");
+    var datetime = (new Date).getTime();
     //var datetime = new Date().toISOString().replace(/:/,'_');
     var child = spawn('streamlink', [`http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
     var stopped;
