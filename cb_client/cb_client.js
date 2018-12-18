@@ -21,6 +21,15 @@ console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
+request.get({
+  url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
+}, function callback(err, httpResponse, body) {
+  if (err) {
+      ai_debug('request failed:', err);
+      return;
+  }
+  var primaryIP = body;
+  server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
   server_debug ('connected to cb_server at http://localhost:8080')
   // tell the backend to load this profile
@@ -99,20 +108,20 @@ setInterval(function() {
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
-            var imageURL = `https://s3-us-west-2.amazonaws.com/${s3_bucket}/${USERNAME}-${datetime}.jpg`
-            ai_debug('Image url uploaded to S3: ' + encodeURI(imageURL));
-            var base64data = new Buffer(data, 'binary');
-            s3.putObject({
-              Bucket: `${s3_bucket}`,
-              Key: `${USERNAME}-${datetime}.jpg`,
-              Body: base64data,
-              ContentType: 'image/jpg',
-              ACL: 'public-read'
-            },function (resp) {
-              //detect_nudity_debug(resp);
-              ai_debug('Successfully uploaded package.');
+            //var imageURL = `https://s3-us-west-2.amazonaws.com/${s3_bucket}/${USERNAME}-${datetime}.jpg`
+            //ai_debug('Image url uploaded to S3: ' + encodeURI(imageURL));
+            //var base64data = new Buffer(data, 'binary');
+            //s3.putObject({
+            //  Bucket: `${s3_bucket}`,
+            //  Key: `${USERNAME}-${datetime}.jpg`,
+            //  Body: base64data,
+            //  ContentType: 'image/jpg',
+            //  ACL: 'public-read'
+            //},function (resp) {
+            //  //detect_nudity_debug(resp);
+            //  ai_debug('Successfully uploaded package.');
               request.get({
-                url: `http://${servicesIP}:5000/?url=${imageURL}`
+                url: `http://${servicesIP}:5000/?url=http://${primaryIP}:8090/`
               }, function callback(err, httpResponse, body) {
                 if (err) {
                     ai_debug('request failed:', err);

@@ -113,6 +113,9 @@ npm install
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /var/log/chaturbae/
 
+RUN apt-get install nginx -y
+ADD nginx.conf /etc/nginx/sites-enabled/default
+
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
