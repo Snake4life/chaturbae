@@ -118,8 +118,6 @@ setInterval(function() {
                     return;
                 }
                 var response = JSON.parse(body);
-                fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
-                fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 var params = {
                   Bucket: `${s3_bucket}`,
                   Delete: { // required
@@ -138,6 +136,8 @@ setInterval(function() {
                 //detect_nudity_debug(prettyjson.render(response))
                 nsfwScore = response.score * 100
                 ai_debug(`AI Detected a NSFW Score of ${nsfwScore}%`);
+                fs.unlink(`${USERNAME}-${datetime}.mkv`)
+                fs.unlink(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
                   if(firstNaked < 1){
                     detect_nudity_debug(`First time seen naked: ${firstNaked}`);
