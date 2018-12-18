@@ -1,8 +1,8 @@
-##CLEAN_USERNAME##:
-  image: patt1293/chaturbae-client:latest
-  environment:
-    CB_USERNAME: "##CB_USERNAME##"
-    AWSKEY: "${AWSKEY}"
-    AWSSECRET: "${AWSSECRET}"
-    SERVICE_IP: "172.26.5.97"
-    DEBUG: "chaturbae:*"
+  ##CLEAN_USERNAME##:
+    image: patt1293/chaturbae-client:latest
+    environment:
+      CB_USERNAME: "##CB_USERNAME##"
+      AWSKEY: "${AWSKEY}"
+      AWSSECRET: "${AWSSECRET}"
+      SERVICE_IP: "172.26.5.97"
+      DEBUG: "chaturbae:*"
