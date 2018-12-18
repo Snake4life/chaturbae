@@ -14,7 +14,7 @@ var ai_debug = require('debug')('chaturbae:ai')
 var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
-var primaryIP = ""
+var pIP = ""
 function getPrimaryIP(){
   request.get({
     url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
@@ -23,8 +23,9 @@ function getPrimaryIP(){
         ai_debug('request failed:', err);
         return;
     } else {
-      console.log(body)
-      return body;
+      var pIP = body;
+      console.log(body);
+      return `${body}`;
     }
 
   });
@@ -93,7 +94,7 @@ socket.on('refresh_panel', (e) => {
 
 
 });
-var minutes = 60, the_interval = minutes  * 1000;
+var minutes = 10, the_interval = minutes  * 1000;
 //var minutes = .5, the_interval = minutes * 60 * 1000;
 var firstNaked = 0;
 setInterval(function() {
@@ -112,8 +113,10 @@ setInterval(function() {
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
-            pIP = getPrimaryIP();
-            console.log(pIP);
+            getPrimaryIP(function (err, data) {
+              console.log(data);
+
+            //console.log(pIP);
               request.get({
                 url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
               }, function callback(err, httpResponse, body) {
@@ -146,6 +149,7 @@ setInterval(function() {
 
                   //socketIRC.emit('messages', USERNAME + " does not appear to be naked, artificial inteligance suggests she's "+nsfwScore+"% naked");
                 }
+              });
               });
           });
         });
