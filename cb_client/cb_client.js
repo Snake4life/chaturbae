@@ -24,7 +24,6 @@ function getPrimaryIP(){
         return;
     } else {
       var pIP = body;
-      console.log(body);
       return `${body}`;
     }
 
@@ -115,7 +114,7 @@ setInterval(function() {
             if (err) { throw err; }
             getPrimaryIP(function (err, data) {
               console.log(data);
-
+              console.log(pIP)
             //console.log(pIP);
               request.get({
                 url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
