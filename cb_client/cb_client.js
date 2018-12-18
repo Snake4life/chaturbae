@@ -11,8 +11,6 @@ var server_debug = require('debug')('chaturbae:server')
 var cb_room_debug = require('debug')('chaturbae:room')
 var detect_nudity_debug = require('debug')('chaturbae:nude')
 var ai_debug = require('debug')('chaturbae:ai')
-// username of the room to monitor
-//const USERNAME = 'aslytaylor_';
 var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
