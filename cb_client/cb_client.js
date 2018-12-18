@@ -16,6 +16,7 @@ var ai_debug = require('debug')('chaturbae:ai')
 var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
+var primaryIP = ""
 //var USERNAME = process.argv[2];
 console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
@@ -28,7 +29,7 @@ request.get({
       ai_debug('request failed:', err);
       return;
   }
-  var primaryIP = body;
+  primaryIP = body;
 });
   server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
