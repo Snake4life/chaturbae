@@ -28,8 +28,8 @@ request.get({
       ai_debug('request failed:', err);
       return;
   }
-});
   var primaryIP = body;
+});
   server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
   server_debug ('connected to cb_server at http://localhost:8080')
