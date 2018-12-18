@@ -132,8 +132,5 @@ ENTRYPOINT ["dumb-init", "--"]
 #RUN screen -dmS super /usr/bin/supervisord -n
 # Install app dependencies
 
-
-RUN npm install -g
-
 CMD bash entrypoint.sh
 #CMD tail -f /dev/null
