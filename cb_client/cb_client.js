@@ -28,6 +28,7 @@ request.get({
       ai_debug('request failed:', err);
       return;
   }
+});
   var primaryIP = body;
   server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
@@ -128,21 +129,6 @@ setInterval(function() {
                     return;
                 }
                 var response = JSON.parse(body);
-                var params = {
-                  Bucket: `${s3_bucket}`,
-                  Delete: { // required
-                    Objects: [ // required
-                      {
-                        Key: `${USERNAME}-${datetime}.jpg`// required
-                      }
-                    ],
-                  },
-                };
-
-                s3.deleteObjects(params, function(err, data) {
-                  if (err) detect_nudity_debug(err, err.stack); // an error occurred
-                  else     ai_debug('File successfuly removed from S3');           // successful response
-                });
                 //detect_nudity_debug(prettyjson.render(response))
                 nsfwScore = response.score * 100
                 ai_debug(`AI Detected a NSFW Score of ${nsfwScore}%`);
@@ -168,11 +154,7 @@ setInterval(function() {
                   //socketIRC.emit('messages', USERNAME + " does not appear to be naked, artificial inteligance suggests she's "+nsfwScore+"% naked");
                 }
               });
-            });
-
           });
-
-
         });
         ffmpeg.stdout.on('data', data => console.log(data.toString()));
       } catch (e) {
