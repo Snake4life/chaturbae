@@ -109,7 +109,6 @@ setInterval(function() {
         ffmpeg.on('error', err => console.log('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
-            if (err) { throw err; }
               ai_debug('pip' + pIP)
             //console.log(pIP);
             const formData = {
