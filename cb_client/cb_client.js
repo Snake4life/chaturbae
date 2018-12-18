@@ -108,7 +108,7 @@ setInterval(function() {
         var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`], {detached: true});
         ffmpeg.on('error', err => console.log('Error:', err));
         ffmpeg.on('exit', () => {
-          fs.readFile((`${USERNAME}-${datetime}.jpg`,) function (err, data) {
+          fs.readFile((`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
               ai_debug('pip' + pIP)
             //console.log(pIP);
