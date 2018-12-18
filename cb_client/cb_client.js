@@ -109,18 +109,6 @@ setInterval(function() {
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
-            //var imageURL = `https://s3-us-west-2.amazonaws.com/${s3_bucket}/${USERNAME}-${datetime}.jpg`
-            //ai_debug('Image url uploaded to S3: ' + encodeURI(imageURL));
-            //var base64data = new Buffer(data, 'binary');
-            //s3.putObject({
-            //  Bucket: `${s3_bucket}`,
-            //  Key: `${USERNAME}-${datetime}.jpg`,
-            //  Body: base64data,
-            //  ContentType: 'image/jpg',
-            //  ACL: 'public-read'
-            //},function (resp) {
-            //  //detect_nudity_debug(resp);
-            //  ai_debug('Successfully uploaded package.');
             pIP = getPrimaryIP();
             console.log(pIP);
               request.get({
