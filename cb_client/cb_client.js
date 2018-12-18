@@ -112,9 +112,12 @@ setInterval(function() {
             if (err) { throw err; }
               ai_debug('pip' + pIP)
             //console.log(pIP);
+            const formData = {
+              file: fs.createReadStream(`${USERNAME}-${datetime}.jpg`)
+            }
               request.post({
                 url: `http://${servicesIP}:5000`,
-                data: fs.createReadStream(`${USERNAME}-${datetime}.jpg`)
+                formData: formData
               }, function callback(err, httpResponse, body) {
                 if (err) {
                     ai_debug('request failed:', err);
