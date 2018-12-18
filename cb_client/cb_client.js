@@ -22,8 +22,11 @@ function getPrimaryIP(){
     if (err) {
         ai_debug('request failed:', err);
         return;
+    } else {
+      console.log(body)
+      return body;
     }
-    return body;
+
   });
 }
 //var USERNAME = process.argv[2];
