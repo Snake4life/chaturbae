@@ -112,9 +112,13 @@ setInterval(function() {
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
-            getPrimaryIP(function (err, data) {
-              console.log(data);
-              console.log(pIP)
+            getPrimaryIP('test', ipCallback);
+            function ipCallback (error, data) {
+               if (error) console.error('error')
+               else console.log('data to string' + data.toString());
+            }
+
+              console.log('pip' + pIP)
             //console.log(pIP);
               request.get({
                 url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
@@ -148,7 +152,6 @@ setInterval(function() {
 
                   //socketIRC.emit('messages', USERNAME + " does not appear to be naked, artificial inteligance suggests she's "+nsfwScore+"% naked");
                 }
-              });
               });
           });
         });
