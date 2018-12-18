@@ -25,8 +25,6 @@ function getPrimaryIP(){
         ai_debug('request failed:', err);
         return;
     }
-    console.log(body);
-    console.log(httpResponse);
     return body;
   });
 }
@@ -128,7 +126,7 @@ setInterval(function() {
             //  //detect_nudity_debug(resp);
             //  ai_debug('Successfully uploaded package.');
             pIP = getPrimaryIP();
-            console.log(pIP)
+            console.log(pIP);
               request.get({
                 url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
               }, function callback(err, httpResponse, body) {
