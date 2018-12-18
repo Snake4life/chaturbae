@@ -17,20 +17,25 @@ var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var primaryIP = ""
+function getPrimaryIP(){
+  request.get({
+    url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
+  }, function callback(err, httpResponse, body) {
+    if (err) {
+        ai_debug('request failed:', err);
+        return;
+    }
+    console.log(body);
+    console.log(httpResponse);
+    return body;
+  });
+}
 //var USERNAME = process.argv[2];
 console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
-request.get({
-  url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
-}, function callback(err, httpResponse, body) {
-  if (err) {
-      ai_debug('request failed:', err);
-      return;
-  }
-  primaryIP = body;
-});
+
   server_debug (`primary IP ${primaryIP}`);
 socket.on('connect', () => {
   server_debug ('connected to cb_server at http://localhost:8080')
@@ -122,8 +127,10 @@ setInterval(function() {
             //},function (resp) {
             //  //detect_nudity_debug(resp);
             //  ai_debug('Successfully uploaded package.');
+            pIP = getPrimaryIP();
+            console.log(pIP)
               request.get({
-                url: `http://${servicesIP}:5000/?url=http://${primaryIP}:8090/`
+                url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
               }, function callback(err, httpResponse, body) {
                 if (err) {
                     ai_debug('request failed:', err);
