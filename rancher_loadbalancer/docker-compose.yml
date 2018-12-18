@@ -1,9 +1,7 @@
 version: '2'
 services:
-  nsfw-api:
+  irc-nsfw-api-lb:
     ports:
     - 5000
-  irc-worker:
-    ports:
     - 8081
-    image: rancher/lb-service-haproxy:<version>
+    image: rancher/lb-service-haproxy:latest

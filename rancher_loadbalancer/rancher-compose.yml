@@ -9,7 +9,7 @@ services:
         service: chaturbae-irc-nudeapi/nsfw-api
       - source_port: 8081
         target_port: 8081
-        service: chaturbae-irc-nudeapi/nsfw-api
+        service: chaturbae-irc-nudeapi/irc-worker
     health_check:
       port: 42
       interval: 2000
