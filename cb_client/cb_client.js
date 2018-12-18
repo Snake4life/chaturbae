@@ -15,20 +15,6 @@ var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
-function getPrimaryIP(){
-  request.get({
-    url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
-  }, function callback(err, httpResponse, body) {
-    if (err) {
-        ai_debug('request failed:', err);
-        return;
-    } else {
-      var pIP = body;
-      return `${body}`;
-    }
-
-  });
-}
 //var USERNAME = process.argv[2];
 console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
@@ -36,6 +22,18 @@ var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
   server_debug ('connected to cb_server at http://localhost:8080')
+  request.get({
+    url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
+  }, function callback(err, httpResponse, body) {
+    if (err) {
+        server_debug ('request failed:', err);
+        return;
+    } else {
+      var pIP = body;
+      server_debug (`pIP from connect socket ${pIP}`)
+    }
+
+  });
   // tell the backend to load this profile
   socket.emit('init', USERNAME);
 });
@@ -112,13 +110,7 @@ setInterval(function() {
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
             if (err) { throw err; }
-            getPrimaryIP('test', ipCallback);
-            function ipCallback (error, data) {
-               if (error) console.error('error')
-               else console.log('data to string' + data.toString());
-            }
-
-              console.log('pip' + pIP)
+              ai_debug('pip' + pIP)
             //console.log(pIP);
               request.get({
                 url: `http://${servicesIP}:5000/?url=http://${pIP}:8090/`
