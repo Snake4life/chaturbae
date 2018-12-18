@@ -86,14 +86,15 @@ var firstNaked = 0;
 setInterval(function() {
   if(inRoom){
     var spawn = require('child_process').spawn;
-    var datetime = new Date().toISOString().replace(/:/,'_');
+    var datetime = new Date().toISOString().split(":").join("");
+    //var datetime = new Date().toISOString().replace(/:/,'_');
     var child = spawn('streamlink', [`http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
     var stopped;
     var timeout = setTimeout(() => {
       detect_nudity_debug('Timeout');
       try {
         process.kill(-child.pid, 'SIGKILL');
-        var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:00.500', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`], {detached: true});
+        var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`], {detached: true});
         ffmpeg.on('error', err => console.log('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
