@@ -6,7 +6,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
     environment:
-      - DEBUG="chaturbae*"
+      DEBUG: "chaturbae:*"
     ports:
       - "8081"
   nsfw-api:
@@ -15,7 +15,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
     environment:
-      - DEBUG="chaturbae*"
+      DEBUG: "chaturbae:*"
     environment:
       PORT: "5000"
     ports:
