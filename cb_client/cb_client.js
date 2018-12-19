@@ -105,7 +105,6 @@ setInterval(function() {
       detect_nudity_debug('Timeout');
       try {
         process.kill(-child.pid, 'SIGKILL');
-        var sleeping = spawn('echo'. ['waiting 10 seconds', ';', 'sleep', '10'])
         var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
         ffmpeg.on('error', err => console.log('Error:', err));
         ffmpeg.on('exit', () => {
@@ -155,7 +154,7 @@ setInterval(function() {
       } catch (e) {
         detect_nudity_debug('Cannot kill process');
       }
-    }, 5*1000);
+    }, 30*1000);
     child.on('error', err => detect_nudity_debug('Error:', err));
     child.on('exit', () => { detect_nudity_debug('Stopped'); clearTimeout(timeout); });
     child.stdout.on('data', data => detect_nudity_debug(data.toString()));
