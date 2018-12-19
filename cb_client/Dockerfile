@@ -106,9 +106,7 @@ COPY . .
 #Build
 RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true;\
-fi &&\
-npm install -g typescript @types/node &&\
-npm install
+fi
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /var/log/chaturbae/
