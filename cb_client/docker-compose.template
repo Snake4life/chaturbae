@@ -7,4 +7,5 @@
         AWSKEY: "${AWSKEY}"
         AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        LOGSTASH_FIELDS: "type=docker:chaturbae-client"
         DEBUG: "chaturbae:*"
