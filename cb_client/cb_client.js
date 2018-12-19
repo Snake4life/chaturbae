@@ -132,7 +132,8 @@ setInterval(function() {
                 if(nsfwScore > 51){
                   if(firstNaked < 1){
                     detect_nudity_debug(`First time seen naked: ${firstNaked}`);
-                  socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+nsfwScore+"% naked");
+                    var roundedPercent = " artificial inteligance suggests she's "
+                  socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+int(round(nsfwScore))+"% naked");
                   }
                   else{
                     detect_nudity_debug(`Seen naked recently: ${firstNaked}`);
