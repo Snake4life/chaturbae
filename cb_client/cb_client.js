@@ -91,7 +91,7 @@ socket.on('refresh_panel', (e) => {
 
 
 });
-var minutes = 10, the_interval = minutes  * 1000;
+var minutes = 60, the_interval = minutes  * 1000;
 //var minutes = .5, the_interval = minutes * 60 * 1000;
 var firstNaked = 0;
 setInterval(function() {
@@ -140,7 +140,7 @@ setInterval(function() {
                 }
                 else{
                   detect_nudity_debug(`Model does not appear to be naked`);
-                  if(firstNaked > 4){
+                  if(firstNaked > 10){
                     detect_nudity_debug(`Haven't posted about model recently. Resetting counter`);
                     firstNaked = 0;
                   }
