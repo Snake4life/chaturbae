@@ -1,5 +1,5 @@
   ##CLEAN_USERNAME##:
-      image: patt1293/chaturbae-client:latest
+      image: ##IMAGE##
       environment:
         CB_USERNAME: "##CB_USERNAME##"
         AWSKEY: "${AWSKEY}"
