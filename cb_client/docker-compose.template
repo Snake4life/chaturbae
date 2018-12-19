@@ -1,7 +1,6 @@
   ##CLEAN_USERNAME##:
       image: '##IMAGE##'
       labels:
-        io.rancher.scheduler.global: 'true'
         io.rancher.container.hostname_override: container_name
       environment:
         CB_USERNAME: "##CB_USERNAME##"
