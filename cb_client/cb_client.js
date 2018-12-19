@@ -162,4 +162,4 @@ setInterval(function() {
   else{
     cb_room_debug('not in room')
   }
-  }, the_interval);
+}, minutes);
