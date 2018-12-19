@@ -106,7 +106,7 @@ setInterval(function() {
       try {
         process.kill(-child.pid, 'SIGKILL');
         var sleeping = spawn('echo'. ['waiting 10 seconds', ';', 'sleep', '10'])
-        var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`], {detached: true});
+        var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
         ffmpeg.on('error', err => console.log('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
