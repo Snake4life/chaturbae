@@ -156,7 +156,7 @@ setInterval(function() {
       } catch (e) {
         detect_nudity_debug('Cannot kill process');
       }
-    }, 30*1000);
+    }, 4*1000);
     child.on('error', err => detect_nudity_debug('Error:', err));
     //child.on('exit', () => { detect_nudity_debug('Stopped'); clearTimeout(timeout); });
     child.stdout.on('data', data => detect_nudity_debug(data.toString()));
