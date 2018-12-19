@@ -104,9 +104,9 @@ COPY package.json .
 # Build
 RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true;\
-fi &&\
-npm install -g typescript @types/node &&\
-npm install
+fi
+#npm install -g typescript @types/node &&\
+#npm install
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -127,4 +127,4 @@ COPY . .
 EXPOSE 8081
 ENTRYPOINT ["dumb-init", "--"]
 #CMD [ "node", "cb_client.js" ]
-CMD node post_chaturbate_irc.js
+CMD bash entrypoint.sh

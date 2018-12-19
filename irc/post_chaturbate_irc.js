@@ -1,5 +1,6 @@
 var io = require("socket.io").listen(8081);
 const c = require('irc-colors');
+var irc_debug = require('debug')('chaturbae:irc')
 io.sockets.on("connection", function (socket) {
     console.log('A Client has Connected to this Server');
     //Let Everyone Know I just Joined
@@ -49,6 +50,15 @@ bot.addListener('error', function(message) {
     console.log('error: ', message);
 });
 
-bot.addListener('raw', function(message) {
-    console.log('raw: ', message);
+bot.addListener('ping', function(message) {
+    irc_debug('IRC Server ping\'d, sending PONG response' );
+});
+bot.addListener('join', function(channel, nick, message) {
+    irc_debug(`Someone joined our channel! ${message}`);
+});
+bot.addListener('registered', function(message) {
+    irc_debug(`Bot recieved connection confirmation`);
+});
+bot.addListener('message', function(nick, to, text, message) {
+    irc_debug(`Message posted in channel - ${message}`);
 });
