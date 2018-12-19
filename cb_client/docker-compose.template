@@ -1,10 +1,5 @@
   ##CLEAN_USERNAME##:
       image: '##IMAGE##'
-      logging:
-        driver: gelf
-        options:
-          gelf-address: udp://107.155.93.182:12201
-          tag: 'docker/chaturbae-client-##CLEAN_USERNAME##'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
