@@ -92,7 +92,7 @@ socket.on('refresh_panel', (e) => {
 
 });
 //var minutes = 60, the_interval = minutes  * 1000;
-var minutes = 5;
+var minutes = 1;
 var the_interval = minutes * 60 * 1000;
 var firstNaked = 0;
 setInterval(function() {
