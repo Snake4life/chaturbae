@@ -47,7 +47,7 @@ var bot = new irc.Client(config.server, config.nick, config, {
 });
 bot.say('nickserv', 'identify randompassword123');
 bot.addListener('error', function(message) {
-    console.log('error: ', message);
+    irc_debug('error: ', message);
 });
 
 bot.addListener('ping', function(message) {
