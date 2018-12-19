@@ -5,7 +5,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
-    environtment:
+    environment:
       - DEBUG="chaturbae*"
     ports:
       - "8081"
@@ -14,7 +14,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
-    environtment:
+    environment:
       - DEBUG="chaturbae*"
     environment:
       PORT: "5000"
