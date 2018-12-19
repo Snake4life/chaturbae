@@ -2,10 +2,16 @@ version: '2'
 services:
   irc-worker:
     image: patt1293/chaturbae-irc
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.hostname_override: container_name
     ports:
       - "8081"
   nsfw-api:
     image: patt1293/nsfw_api
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.hostname_override: container_name
     environment:
       PORT: "5000"
     ports:
