@@ -10,11 +10,6 @@ sample=$(node get_18_us_list.js)
 #sample='[{"name":"foo"},{"name":"bar"}]'
 count=0
 for row in $(echo "${sample}" | jq -r '.[] | @base64'); do
-  if [[ $count < 11 ]]; then
-    count=$((count+1))
-  else
-    break
-  fi
   _jq() {
   echo ${row} | base64 --decode | jq -r ${1}
 }
