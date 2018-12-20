@@ -55,10 +55,11 @@ socket.on('room_leave', (e) => {
 
 socket.on('tip', (e) => {
   cb_room_log.info(prettyjson.render(e))
+  var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: `${e.amount}`, tipper: `${e.user.username}`})
+  tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
   if(e.amount > 1000){
     socketIRC.emit('tip', e.user.username + ` tipped a LARGE amount - ${e.amount} -- http://www.chaturbate.com/${USERNAME}`);
   }
-  cb_room_log.info(`${e.user.username} tipped ${e.amount} tokens`);
 });
 
 socket.on('room_message', (e) => {
