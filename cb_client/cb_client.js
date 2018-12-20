@@ -15,6 +15,8 @@ var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
+const logger = require('pino')()
+const sever_log = = logger.child({ event: 'chaturbate:server' })
 //var logJson = {} // empty Object
 //var serverJsonKey = 'Orientation Sensor';
 //var roomJsonKey = 'Orientation Sensor';
@@ -26,7 +28,7 @@ AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` })
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
-  server_debug ('%j', 'connected to cb_server at http://localhost:8080')
+  child.info('connected to cb_server at http://localhost:8080');
   request.get({
     url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
   }, function callback(err, httpResponse, body) {
@@ -137,7 +139,7 @@ setInterval(function() {
                   if(firstNaked < 1){
                     detect_nudity_debug(`First time seen naked: ${firstNaked}`);
                     var roundedPercent = " artificial inteligance suggests she's "
-                  socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+int(round(nsfwScore))+"% naked");
+                  socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+Math.round(nsfwScore)+"% naked");
                   }
                   else{
                     detect_nudity_debug(`Seen naked recently: ${firstNaked}`);
