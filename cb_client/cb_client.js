@@ -15,13 +15,18 @@ var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
+//var logJson = {} // empty Object
+//var serverJsonKey = 'Orientation Sensor';
+//var roomJsonKey = 'Orientation Sensor';
+//o[key] = []; // empty Array, which you can push() values into
+
 //var USERNAME = process.argv[2];
 console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
-  server_debug ('connected to cb_server at http://localhost:8080')
+  server_debug ('%j', 'connected to cb_server at http://localhost:8080')
   request.get({
     url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
   }, function callback(err, httpResponse, body) {
@@ -40,8 +45,8 @@ socket.on('connect', () => {
 
 socket.on('init', (e) => {
   server_debug(prettyjson.render(e));
-  server_debug(`Welcome to ${e.room}'s room!`);
-  server_debug(`Current room subject is: ${e.subject}`);
+  server_debug('%j',`Welcome to ${e.room}'s room!`);
+  server_debug('%j',`Current room subject is: ${e.subject}`);
 });
 
 socket.on('room_entry', (e) => {
