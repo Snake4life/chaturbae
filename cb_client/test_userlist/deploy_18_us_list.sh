@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "$CBUSER"
-IMAGE="patt1293/chaturbae-client:latest"
 ls -alh
 git checkout master
 git pull
