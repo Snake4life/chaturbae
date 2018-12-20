@@ -142,7 +142,7 @@ setInterval(function() {
                 fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
                 fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
-                  naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true' });
+                  naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`});
                   naked_logger.info(`${USERNAME} appears to be naked`);
                   if(firstNaked < 1){
                     ai_log.info(`First time seen naked: ${firstNaked}`);
