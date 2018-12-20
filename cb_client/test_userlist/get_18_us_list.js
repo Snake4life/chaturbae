@@ -1,7 +1,5 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var io = require('socket.io-client')
-var socket = io('http://localhost:8098');
 const username = process.argv[2];
 var pattern = /^_/g;
 const url = 'https://chaturbate.com/tag/18/f/';
