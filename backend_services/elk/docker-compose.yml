@@ -13,5 +13,5 @@ services:
       - "12201:12201/udp"
       - "12202:12202"
       - "12202:12202/udp"
-   volumes:
-     - /home/elasticsearch:/var/lib/elasticsearch
+    volumes:
+      - /home/elasticsearch:/var/lib/elasticsearch

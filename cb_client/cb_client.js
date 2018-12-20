@@ -5,7 +5,7 @@ var socketIRC = io(`http://${servicesIP}:8081`);
 var fs = require('fs');
 var AWS = require('aws-sdk');
 var request = require('request');
-var inRoom = true;
+var inRoom = false;
 var prettyjson = require('prettyjson');
 var server_debug = require('debug')('chaturbae:server')
 var cb_room_debug = require('debug')('chaturbae:room')
@@ -39,7 +39,6 @@ socket.on('init', (e) => {
 socket.on('room_entry', (e) => {
   if(e.user.username == USERNAME) {
     cb_room_log.info(`Host entered the room`);
-    inRoom = true;
     socketIRC.emit('message', USERNAME + " has joined her CB room http://www.chaturbate.com/"+USERNAME);
   }
   cb_room_log.info(`${e.user.username} has joined the room`);
@@ -48,7 +47,6 @@ socket.on('room_entry', (e) => {
 socket.on('room_leave', (e) => {
   if(e.user.username == USERNAME) {
     cb_room_log.info(`Host left the room`);
-    inRoom = false;
     socketIRC.emit('left', USERNAME + " has left her CB room http://www.chaturbate.com/"+USERNAME);
   }
   cb_room_log.info(`${e.user.username} has left the room`);
@@ -85,12 +83,25 @@ socket.on('refresh_panel', (e) => {
 
 });
 //var minutes = 60, the_interval = minutes  * 1000;
-var minutes = .25;
+ranSecond = Math.floor(Math.random() * 150) + 30
+minutes = 1;
+//var minutes = .25;
 var the_interval = minutes * 60 * 1000;
 var firstNaked = 0;
+var spawn = require('child_process').spawn;
 setInterval(function() {
+  var isOnline = spawn('node',  ['check_if_online.js', `${USERNAME}`]);
+  isOnline.on('close', function (code) {
+      if(code == 0){
+        inRoom=true
+        server_log.info(`${USERNAME} is online - check_if_online.js`)
+      }
+      else{
+        inRoom=false
+        server_log.info(`${USERNAME} is offline - check_if_online.js`)
+      }
+  });
   if(inRoom){
-    var spawn = require('child_process').spawn;
     var datetime = (new Date).getTime();
     var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
     var stopped;
@@ -123,14 +134,15 @@ setInterval(function() {
                 fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
                   naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true' });
+                  naked_logger.info(`${USERNAME} appears to be naked`);
                   if(firstNaked < 1){
-                    naked_logger.info(`First time seen naked: ${firstNaked}`);
+                    ai_log.info(`First time seen naked: ${firstNaked}`);
                     var roundedPercent = " artificial inteligance suggests she's "
                   socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+Math.round(nsfwScore)+"% naked");
                   }
                   else{
                     //ai_log.child({ is_naked: 'false' })
-                    naked_logger.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
+                    ai_log.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
                   }
                   firstNaked += 1;
                 }
@@ -138,11 +150,9 @@ setInterval(function() {
                   not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' });
                   not_naked_logger.info(`${USERNAME} does not appear to be naked`);
                   if(firstNaked > 10){
-                      not_naked_logger.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
+                      ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
                     firstNaked = 0;
                   }
-
-                  //socketIRC.emit('messages', USERNAME + " does not appear to be naked, artificial inteligance suggests she's "+nsfwScore+"% naked");
                 }
               });
           });

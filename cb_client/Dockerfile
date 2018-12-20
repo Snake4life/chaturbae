@@ -117,6 +117,8 @@ RUN groupadd -r chaturbae && useradd -r -g chaturbae -G audio,video chaturbae
 
 COPY package.json .
 
+RUN npm install pino
+
 # Bundle app source
 COPY . .
 

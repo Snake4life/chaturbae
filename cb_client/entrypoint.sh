@@ -1,4 +1,5 @@
 #!/bin/bash
+node generate_log.js init "npm install deps started"
 npm install >> /var/log/chaturbae/npm_install.log 2>&1
 node generate_log.js init "npm install deps complete"
 node generate_log.js init "starting nginx - /var/log/chaturbae/supervisor.log"
