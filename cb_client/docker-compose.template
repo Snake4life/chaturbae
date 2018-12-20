@@ -11,3 +11,4 @@
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=##CB_USERNAME##"
         DECODE_JSON_LOGS: "true"
         DEBUG: "chaturbae:*"
+        DEBUG_TIME: "true"
