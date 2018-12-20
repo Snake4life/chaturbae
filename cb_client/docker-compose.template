@@ -6,8 +6,6 @@
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "##CB_USERNAME##"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=##CB_USERNAME##"
