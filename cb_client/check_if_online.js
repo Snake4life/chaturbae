@@ -8,7 +8,7 @@ var online = false;
   request(url, function(error, response, html){
       if(!error){
         //console.log(html);
-        if(! html.includes('Room is currently offline')){
+        if(html.includes('Room is currently offline')){
           console.log('false')
           process.exit(1);
         }

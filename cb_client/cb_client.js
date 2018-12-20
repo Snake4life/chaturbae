@@ -1,4 +1,5 @@
 var servicesIP =  process.env.SERVICE_IP
+var debugTime = process.env.DEBUG_TIME
 var io = require('socket.io-client')
 var socket = io(`http://localhost:8080`);
 var socketIRC = io(`http://${servicesIP}:8081`);
@@ -82,11 +83,18 @@ socket.on('refresh_panel', (e) => {
 
 
 });
-//var minutes = 60, the_interval = minutes  * 1000;
 ranSecond = Math.floor(Math.random() * 150) + 30
 minutes = 1;
 //var minutes = .25;
-var the_interval = minutes * 60 * 1000;
+
+if(debugTime == "true"){
+   var the_interval = 10 * 1000;
+}
+else {
+  var the_interval = minutes * 60 * 1000;
+}
+//var minutes = 60, the_interval = minutes  * 1000;
+
 var firstNaked = 0;
 var spawn = require('child_process').spawn;
 setInterval(function() {
@@ -103,12 +111,13 @@ setInterval(function() {
   });
   if(inRoom){
     var datetime = (new Date).getTime();
-    var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
-    var stopped;
-    var timeout = setTimeout(() => {
-      nudity_log.info(`streamlink command timeout reached (${minutes} minute(s))`);
+    //var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
+    var child = spawn('bash', ['streamlink.sh', `${USERNAME}`, `${datetime}`])
+    child.on('error', err => nudity_log.error('Error:', err));
+    child.on('exit', () => {
+      nudity_log.info(`background nudity worker exited gracefully`);
+      child.stdout.on('data', data => nudity_log.info(data.toString()));
       try {
-        process.kill(-child.pid, 'SIGKILL');
         var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
         ffmpeg.on('error', err => nudity_log.info('Error:', err));
         ffmpeg.on('exit', () => {
@@ -161,10 +170,7 @@ setInterval(function() {
       } catch (e) {
         nudity_log.error('Cannot kill process');
       }
-    }, 4*1000);
-    child.on('error', err => nudity_log.error('Error:', err));
-    child.on('exit', () => { nudity_log.info(`background nudity worker exited gracefully`); clearTimeout(timeout); });
-    child.stdout.on('data', data => nudity_log.info(data.toString()));
+    });
   }
   else{
     cb_room_log.info(`${USERNAME} does not appear to be in her room`)
