@@ -14,6 +14,5 @@ services:
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=anabelleleigh"
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
-        DEBUG_TIME: "true"
       volumes:
         - ./node_modules/:/usr/src/app/cb_client/node_modules
