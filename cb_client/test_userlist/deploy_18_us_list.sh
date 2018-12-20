@@ -10,7 +10,7 @@ sample=$(node get_18_us_list.js)
 #sample='[{"name":"foo"},{"name":"bar"}]'
 count=0
 for row in $(echo "${sample}" | jq -r '.[] | @base64'); do
-  if [[ $count < 6 ]]; then
+  if [[ $count < 11 ]]; then
     count=$((count+1))
   else
     break
