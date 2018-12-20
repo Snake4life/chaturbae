@@ -62,7 +62,7 @@ socket.on('tip', (e) => {
 });
 
 socket.on('room_message', (e) => {
-  var cb_chat_log = logger.child({ event: 'logging:chaturbae-room-message', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
+  cb_chat_log = logger.child({ event: 'logging:chaturbae-message', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
   cb_chat_log.info(`${e.message}`);
 
 });
