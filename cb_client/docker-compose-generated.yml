@@ -8,8 +8,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "dropitella"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=dropitella"
@@ -23,8 +21,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "asuka_love"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=asuka_love"
@@ -38,8 +34,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "prettyjulyxxx"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=prettyjulyxxx"
@@ -53,8 +47,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "hotkateee"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=hotkateee"
@@ -68,8 +60,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "luckysparkles"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=luckysparkles"
@@ -83,8 +73,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "ensaqwoien"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=ensaqwoien"
@@ -98,8 +86,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "carlee_adams"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=carlee_adams"
@@ -113,8 +99,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "shannel_duperly"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=shannel_duperly"
@@ -128,8 +112,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "chupika"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=chupika"
@@ -143,8 +125,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "honey_pleasure"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=honey_pleasure"
@@ -158,8 +138,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "heidi_klum18"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=heidi_klum18"
@@ -173,8 +151,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "akyra_ebony"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=akyra_ebony"
@@ -188,8 +164,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "graciesmall"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=graciesmall"
@@ -203,8 +177,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "ready2learn"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=ready2learn"
@@ -218,8 +190,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "offi_lilly"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=offi_lilly"
@@ -233,8 +203,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "aislynsweet"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=aislynsweet"
@@ -248,8 +216,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "samantha_delarosa"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=samantha_delarosa"
@@ -263,8 +229,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "kimdevine"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=kimdevine"
@@ -278,8 +242,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "cinema_donna"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=cinema_donna"
@@ -293,8 +255,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "madison_hall"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=madison_hall"
@@ -308,8 +268,6 @@ services:
         io.rancher.container.pull_image: always
       environment:
         CB_USERNAME: "sofy9"
-        AWSKEY: "${AWSKEY}"
-        AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
         LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=sofy9"
