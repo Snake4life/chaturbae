@@ -3,7 +3,7 @@ echo '{"chaturbae-init": "npm install typescript - log /var/log/chaturbae/npm_in
 npm install -g typescript @types/node >> /var/log/chaturbae/npm_install.log
 echo '{"chaturbae-init": "npm install typescript complete"}'
 echo '{"chaturbae-init": "npm install deps - log /var/log/chaturbae/npm_install.log"}'
-npm install >> /var/log/chaturbae/npm_install.log
+npm install >> /var/log/chaturbae/npm_install.log 2>&1
 echo '{"chaturbae-init": "npm install deps complete"}'
 echo '{"chaturbae-init": "starting nginx - /var/log/chaturbae/supervisor.log"}'
 service nginx start > /var/log/chaturbae/supervisor.log 2>&1 &
