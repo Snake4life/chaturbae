@@ -10,5 +10,5 @@
         AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
-        #LOGSTASH_FIELDS: {{.Container.Config.Hostname}}
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=##CB_USERNAME##"
         DEBUG: "chaturbae:*"
