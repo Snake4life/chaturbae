@@ -100,7 +100,7 @@ setInterval(function() {
     var spawn = require('child_process').spawn;
     var datetime = (new Date).getTime();
     //var datetime = new Date().toISOString().replace(/:/,'_');
-    var child = spawn('streamlink', [`http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
+    var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
     var stopped;
     var timeout = setTimeout(() => {
       detect_nudity_debug('Timeout');
