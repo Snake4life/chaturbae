@@ -1,15 +1,16 @@
 version: '2'
 services:
-    dropitella:
-      image: 'patt1293/chaturbae-client:latest'
+    anabelleleigh:
+      build: .
+      #image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
         io.rancher.container.pull_image: always
       environment:
-        CB_USERNAME: "dropitella"
+        CB_USERNAME: "anabelleleigh"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
         SYSLOG_TAG: '{docker: "chaturbae-client"}'
-        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=dropitella"
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=anabelleleigh"
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"

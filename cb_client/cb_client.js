@@ -15,8 +15,11 @@ var USERNAME = process.env.CB_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
-const logger = require('pino')()
-const sever_log = logger.child({ event: 'chaturbate:server' })
+var logger = require('pino')()
+var server_log = logger.child({ event: 'chaturbate:server' })
+var cb_room_log = logger.child({ event: 'chaturbate:room' })
+var nudity_log = logger.child({ event: 'chaturbate:nude' })
+var ai_log = logger.child({ event: 'chaturbate:nude' })
 //var logJson = {} // empty Object
 //var serverJsonKey = 'Orientation Sensor';
 //var roomJsonKey = 'Orientation Sensor';
@@ -28,57 +31,46 @@ AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` })
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
-  child.info('connected to cb_server at http://localhost:8080');
-  request.get({
-    url: `http://rancher-metadata/2015-12-19/self/container/primary_ip`
-  }, function callback(err, httpResponse, body) {
-    if (err) {
-        server_debug ('request failed:', err);
-        return;
-    } else {
-      var pIP = body;
-      server_debug (`pIP from connect socket ${pIP}`)
-    }
-
-  });
+  server_log.info('connected to cb_server at http://localhost:8080');
   // tell the backend to load this profile
   socket.emit('init', USERNAME);
 });
 
 socket.on('init', (e) => {
-  server_debug(prettyjson.render(e));
-  server_debug('%j',`Welcome to ${e.room}'s room!`);
-  server_debug('%j',`Current room subject is: ${e.subject}`);
+  //server_debug(prettyjson.render(e));
+  server_log.info(`Welcome to ${e.room}'s room!`);
+  server_log.info(`Current room subject is: ${e.subject}`);
 });
 
 socket.on('room_entry', (e) => {
   if(e.user.username == USERNAME) {
-    cb_room_debug(`Host entered the room`);
+    cb_room_log.info(`Host entered the room`);
     inRoom = true;
     socketIRC.emit('message', USERNAME + " has joined her CB room http://www.chaturbate.com/"+USERNAME);
   }
-  cb_room_debug(`${e.user.username} has joined the room`);
+  cb_room_log.info(`${e.user.username} has joined the room`);
 });
 
 socket.on('room_leave', (e) => {
   if(e.user.username == USERNAME) {
-    cb_room_debug(`Host left the room`);
+    cb_room_log.info(`Host left the room`);
     inRoom = false;
     socketIRC.emit('left', USERNAME + " has left her CB room http://www.chaturbate.com/"+USERNAME);
   }
-  console.log(`${e.user.username} has left the room`);
+  cb_room_log.info(`${e.user.username} has left the room`);
 });
 
 socket.on('tip', (e) => {
-  cb_room_debug(prettyjson.render(e))
+  cb_room_log.info(prettyjson.render(e))
   if(e.amount > 1000){
     socketIRC.emit('tip', e.user.username + ` tipped a LARGE amount - ${e.amount} -- http://www.chaturbate.com/${USERNAME}`);
   }
-  cb_room_debug(`${e.user.username} tipped ${e.amount} tokens`);
+  cb_room_log.info(`${e.user.username} tipped ${e.amount} tokens`);
 });
 
 socket.on('room_message', (e) => {
-  cb_room_debug(`${e.user.username}: ${e.message}`);
+  var cb_chat_log = logger.child({ event: 'chaturbate:room', chat_user: `${e.user.username}` })
+  cb_chat_log.info(`${e.message}`);
 
 });
 
@@ -86,14 +78,14 @@ socket.on('disconnect', () => {
   server_debug('disconnect')
 });
 socket.on('refresh_panel', (e) => {
-  cb_room_debug('refresh goal');
-  cb_room_debug(prettyjson.render(e))
+  cb_room_log.info('Goal refreshed');
+  cb_room_log.info(e)
   try {
     message = `New Goal reached. Current goal #${e.goal.goalCurrent} - Remaining goals: ${e.goal.goalRemaining} - -- http://www.chaturbate.com/${USERNAME}`;
     //socketIRC.emit('goal', message)
   }
   catch (e){
-    cb_room_debug('no goal set')
+    cb_room_log.info('no goal set to refresh')
   }
 
 
@@ -109,11 +101,11 @@ setInterval(function() {
     var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
     var stopped;
     var timeout = setTimeout(() => {
-      detect_nudity_debug('Timeout');
+      nudity_log.info(`streamlink command timeout reached (${minutes} minute(s))`);
       try {
         process.kill(-child.pid, 'SIGKILL');
         var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
-        ffmpeg.on('error', err => console.log('Error:', err));
+        ffmpeg.on('error', err => nudity_log.info('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
               ai_debug('pip' + pIP)
@@ -132,24 +124,24 @@ setInterval(function() {
                 var response = JSON.parse(body);
                 //detect_nudity_debug(prettyjson.render(response))
                 nsfwScore = response.score * 100
-                ai_debug(`AI Detected a NSFW Score of ${nsfwScore}%`);
+                ai_log.info(`AI Detected a NSFW Score of ${nsfwScore}%`);
                 fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
                 fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
                   if(firstNaked < 1){
-                    detect_nudity_debug(`First time seen naked: ${firstNaked}`);
+                    ai_log.info(`First time seen naked: ${firstNaked}`);
                     var roundedPercent = " artificial inteligance suggests she's "
                   socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+Math.round(nsfwScore)+"% naked");
                   }
                   else{
-                    detect_nudity_debug(`Seen naked recently: ${firstNaked}`);
+                    ai_log.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
                   }
                   firstNaked += 1;
                 }
                 else{
-                  detect_nudity_debug(`Model does not appear to be naked`);
+                  ai_log.info(`${USERNAME} does not appear to be naked`);
                   if(firstNaked > 10){
-                    detect_nudity_debug(`Haven't posted about model recently. Resetting counter`);
+                    ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
                     firstNaked = 0;
                   }
 
@@ -163,11 +155,11 @@ setInterval(function() {
         detect_nudity_debug('Cannot kill process');
       }
     }, 4*1000);
-    child.on('error', err => detect_nudity_debug('Error:', err));
-    //child.on('exit', () => { detect_nudity_debug('Stopped'); clearTimeout(timeout); });
-    child.stdout.on('data', data => detect_nudity_debug(data.toString()));
+    child.on('error', err => nudity_log.info('Error:', err));
+    child.on('exit', () => { nudity_log.info(`background nudity worker exited gracefully`); clearTimeout(timeout); });
+    child.stdout.on('data', data => nudity_log.info(data.toString()));
   }
   else{
-    cb_room_debug('not in room')
+    cb_room_log.info(`${USERNAME} does not appear to be in her room`)
   }
   }, the_interval);
