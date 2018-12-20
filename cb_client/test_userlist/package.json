@@ -1,0 +1,26 @@
+{
+  "name": "@patrick-hudson/chaturbae",
+  "version": "1.0.0",
+  "description": "Complex enigma of excessive node modules combined with 2018's biggest hit Docker, and last but not least everyones favorite internet hobby, Porn!",
+  "main": "cb_client.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "requests": "^0.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrick-hudson/chaturbae.git"
+  },
+  "author": "Patrick Hudson",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/patrick-hudson/chaturbae/issues"
+  },
+  "homepage": "https://github.com/patrick-hudson/chaturbae#readme"
+}
