@@ -30,6 +30,7 @@
     "irc": "^0.5.2",
     "irc-colors": "^1.5.0",
     "nodemon": "^1.18.9",
+    "pino-pretty": "^2.5.0",
     "puppeteer": "^1.11.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
