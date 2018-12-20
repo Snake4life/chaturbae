@@ -1,0 +1,17 @@
+version: '2'
+services:
+  elk:
+    #build: .
+    labels:
+      io.rancher.scheduler.affinity:host_label: funct=elk
+    image: patt1293/elk-docker
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+      - "5045:5045"
+      - "12201:12201/udp"
+      - "12202:12202"
+      - "12202:12202/udp"
+   volumes:
+     - /home/elasticsearch:/var/lib/elasticsearch
