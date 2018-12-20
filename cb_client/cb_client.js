@@ -16,10 +16,10 @@ var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
 var logger = require('pino')()
-var server_log = logger.child({ event: 'chaturbate:server' })
-var cb_room_log = logger.child({ event: 'chaturbate:room', cb_username: USERNAME})
-var nudity_log = logger.child({ event: 'chaturbate:nude' })
-var ai_log = logger.child({ event: 'chaturbate:nude' })
+var server_log = logger.child({ event: 'logging:chaturbae-server' })
+var cb_room_log = logger.child({ event: 'logging:chaturbae-room', cb_username: USERNAME})
+var nudity_log = logger.child({ event: 'logging:chaturbae-nude}' })
+var ai_log = logger.child({ event: 'logging:chaturbae-nude' })
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
@@ -63,7 +63,7 @@ socket.on('tip', (e) => {
 });
 
 socket.on('room_message', (e) => {
-  var cb_chat_log = logger.child({ event: 'chaturbate:room', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
+  var cb_chat_log = logger.child({ event: 'logging:chaturbae-room-message', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
   cb_chat_log.info(`${e.message}`);
 
 });
@@ -122,7 +122,7 @@ setInterval(function() {
                 fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
                 fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
-                  naked_logger = logger.child({event: 'chaturbate:nude', is_naked: 'true' });
+                  naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true' });
                   if(firstNaked < 1){
                     naked_logger.info(`First time seen naked: ${firstNaked}`);
                     var roundedPercent = " artificial inteligance suggests she's "
@@ -135,7 +135,7 @@ setInterval(function() {
                   firstNaked += 1;
                 }
                 else{
-                  not_naked_logger = logger.child({event: 'chaturbate:nude', is_naked: 'false' });
+                  not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' });
                   not_naked_logger.info(`${USERNAME} does not appear to be naked`);
                   if(firstNaked > 10){
                       not_naked_logger.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
