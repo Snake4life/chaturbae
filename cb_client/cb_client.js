@@ -17,27 +17,21 @@ var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
 var logger = require('pino')()
 var server_log = logger.child({ event: 'chaturbate:server' })
-var cb_room_log = logger.child({ event: 'chaturbate:room' })
+var cb_room_log = logger.child({ event: 'chaturbate:room', cb_username: USERNAME})
 var nudity_log = logger.child({ event: 'chaturbate:nude' })
 var ai_log = logger.child({ event: 'chaturbate:nude' })
-//var logJson = {} // empty Object
-//var serverJsonKey = 'Orientation Sensor';
-//var roomJsonKey = 'Orientation Sensor';
-//o[key] = []; // empty Array, which you can push() values into
-
-//var USERNAME = process.argv[2];
-console.log(USERNAME);
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
 socket.on('connect', () => {
   server_log.info('connected to cb_server at http://localhost:8080');
+  server_log.info(`got username from environment - ${USERNAME}`);
   // tell the backend to load this profile
   socket.emit('init', USERNAME);
 });
 
 socket.on('init', (e) => {
-  //server_debug(prettyjson.render(e));
+  server_log.info(e);
   server_log.info(`Welcome to ${e.room}'s room!`);
   server_log.info(`Current room subject is: ${e.subject}`);
 });
@@ -69,7 +63,7 @@ socket.on('tip', (e) => {
 });
 
 socket.on('room_message', (e) => {
-  var cb_chat_log = logger.child({ event: 'chaturbate:room', chat_user: `${e.user.username}` })
+  var cb_chat_log = logger.child({ event: 'chaturbate:room', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
   cb_chat_log.info(`${e.message}`);
 
 });
@@ -91,7 +85,7 @@ socket.on('refresh_panel', (e) => {
 
 });
 //var minutes = 60, the_interval = minutes  * 1000;
-var minutes = 1;
+var minutes = .25;
 var the_interval = minutes * 60 * 1000;
 var firstNaked = 0;
 setInterval(function() {
@@ -128,20 +122,23 @@ setInterval(function() {
                 fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
                 fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
+                  naked_logger = logger.child({event: 'chaturbate:nude', is_naked: 'true' });
                   if(firstNaked < 1){
-                    ai_log.info(`First time seen naked: ${firstNaked}`);
+                    naked_logger.info(`First time seen naked: ${firstNaked}`);
                     var roundedPercent = " artificial inteligance suggests she's "
                   socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+Math.round(nsfwScore)+"% naked");
                   }
                   else{
-                    ai_log.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
+                    //ai_log.child({ is_naked: 'false' })
+                    naked_logger.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
                   }
                   firstNaked += 1;
                 }
                 else{
-                  ai_log.info(`${USERNAME} does not appear to be naked`);
+                  not_naked_logger = logger.child({event: 'chaturbate:nude', is_naked: 'false' });
+                  not_naked_logger.info(`${USERNAME} does not appear to be naked`);
                   if(firstNaked > 10){
-                    ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
+                      not_naked_logger.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
                     firstNaked = 0;
                   }
 
@@ -150,12 +147,12 @@ setInterval(function() {
               });
           });
         });
-        ffmpeg.stdout.on('data', data => console.log(data.toString()));
+        ffmpeg.stdout.on('data', data => nudity_log.info(data.toString()));
       } catch (e) {
-        detect_nudity_debug('Cannot kill process');
+        nudity_log.error('Cannot kill process');
       }
     }, 4*1000);
-    child.on('error', err => nudity_log.info('Error:', err));
+    child.on('error', err => nudity_log.error('Error:', err));
     child.on('exit', () => { nudity_log.info(`background nudity worker exited gracefully`); clearTimeout(timeout); });
     child.stdout.on('data', data => nudity_log.info(data.toString()));
   }

@@ -98,11 +98,6 @@ cd /tmp &&\
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&\
 dpkg -i google-chrome-stable_current_amd64.deb;\
 fi
-COPY package.json .
-
-# Bundle app source
-COPY . .
-
 #Build
 RUN if [ "$USE_CHROME_STABLE" = "true" ]; then \
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true;\
@@ -119,6 +114,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add user
 RUN groupadd -r chaturbae && useradd -r -g chaturbae -G audio,video chaturbae
+
+COPY package.json .
+
+# Bundle app source
+COPY . .
+
+
 #&& mkdir -p /home/blessuser/Downloads
 #&& chown -R blessuser:blessuser /home/blessuser \
 #&& chown -R blessuser:blessuser $application_directory
