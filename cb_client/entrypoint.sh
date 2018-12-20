@@ -11,5 +11,5 @@ echo '{"chaturbae-init": "starting supervisord - /var/log/chaturbae/supervisor.l
 /usr/bin/supervisord > /var/log/chaturbae/supervisor.log 2>&1 &
 sleep 3
 echo '{"chaturbae-init": "complete"}'
-tail -f /var/log/chaturbae/cb_*.log
+tail -f /var/log/chaturbae/cb_client.log
 #tail -f /dev/null
