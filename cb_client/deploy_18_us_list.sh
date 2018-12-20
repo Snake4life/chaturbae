@@ -3,7 +3,7 @@ echo "$CBUSER"
 IMAGE="patt1293/chaturbae-client:latest"
 ls -alh
 git checkout master
-cd cb_client
+npm install
 touch docker-compose-generated.yml
 dOut=""
 sample=$(node get_18_us_list.js)
