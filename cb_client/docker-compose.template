@@ -9,6 +9,6 @@
         AWSKEY: "${AWSKEY}"
         AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
-        SYSLOG_TAG: {{.ContainerName}}+route.Options["append_tag"]
-        LOGSTASH_FIELDS: {{.Container.Config.Hostname}}
+        SYSLOG_TAG: 'docker'
+        #LOGSTASH_FIELDS: {{.Container.Config.Hostname}}
         DEBUG: "chaturbae:*"
