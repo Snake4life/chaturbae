@@ -9,5 +9,6 @@
         AWSKEY: "${AWSKEY}"
         AWSSECRET: "${AWSSECRET}"
         SERVICE_IP: "watcher1.backend.chaturbae.tv"
-        LOGSTASH_FIELDS: "type=docker:chaturbae-client"
+        SYSLOG_TAG: docker
+        LOGSTASH_FIELDS: "job=chaturbae-client"
         DEBUG: "chaturbae:*"

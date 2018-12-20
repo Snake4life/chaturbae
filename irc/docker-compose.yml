@@ -2,11 +2,6 @@ version: '2'
 services:
   irc-worker:
     image: patt1293/chaturbae-irc
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://107.155.93.182:12201
-        tag: '{ docker/chaturbae-irc }'
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
@@ -16,11 +11,6 @@ services:
       - "8081"
   nsfw-api:
     image: patt1293/nsfw_api
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://107.155.93.182:12201
-        tag: '{ docker/chaturbae-nsfw-api}'
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
