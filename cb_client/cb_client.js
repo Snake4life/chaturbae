@@ -16,7 +16,7 @@ var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
 const logger = require('pino')()
-const sever_log = = logger.child({ event: 'chaturbate:server' })
+const sever_log = logger.child({ event: 'chaturbate:server' })
 //var logJson = {} // empty Object
 //var serverJsonKey = 'Orientation Sensor';
 //var roomJsonKey = 'Orientation Sensor';
