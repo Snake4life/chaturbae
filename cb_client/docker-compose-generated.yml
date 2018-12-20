@@ -1,0 +1,317 @@
+version: '2'
+services:
+    dropitella:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "dropitella"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=dropitella"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    asuka-love:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "asuka_love"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=asuka_love"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    prettyjulyxxx:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "prettyjulyxxx"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=prettyjulyxxx"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    hotkateee:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "hotkateee"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=hotkateee"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    luckysparkles:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "luckysparkles"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=luckysparkles"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    ensaqwoien:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "ensaqwoien"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=ensaqwoien"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    carlee-adams:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "carlee_adams"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=carlee_adams"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    shannel-duperly:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "shannel_duperly"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=shannel_duperly"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    chupika:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "chupika"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=chupika"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    honey-pleasure:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "honey_pleasure"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=honey_pleasure"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    heidi-klum18:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "heidi_klum18"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=heidi_klum18"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    akyra-ebony:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "akyra_ebony"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=akyra_ebony"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    graciesmall:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "graciesmall"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=graciesmall"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    ready2learn:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "ready2learn"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=ready2learn"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    offi-lilly:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "offi_lilly"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=offi_lilly"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    aislynsweet:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "aislynsweet"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=aislynsweet"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    samantha-delarosa:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "samantha_delarosa"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=samantha_delarosa"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    kimdevine:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "kimdevine"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=kimdevine"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    cinema-donna:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "cinema_donna"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=cinema_donna"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    madison-hall:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "madison_hall"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=madison_hall"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
+    sofy9:
+      image: ''
+      labels:
+        app: chaturbae:client
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.pull_image: always
+      environment:
+        CB_USERNAME: "sofy9"
+        AWSKEY: "${AWSKEY}"
+        AWSSECRET: "${AWSSECRET}"
+        SERVICE_IP: "watcher1.backend.chaturbae.tv"
+        SYSLOG_TAG: '{docker: "chaturbae-client"}'
+        LOGSTASH_FIELDS: "platform=docker,job=chaturbae-client,cb_username=sofy9"
+        DECODE_JSON_LOGS: "false"
+        DEBUG: "chaturbae:*"
