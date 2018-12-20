@@ -9,21 +9,15 @@ dOut=""
 sample=$(node get_18_us_list.js)
 #sample='[{"name":"foo"},{"name":"bar"}]'
 for row in $(echo "${sample}" | jq -r '.[] | @base64'); do
-    _jq() {
-     echo ${row} | base64 --decode | jq -r ${1}
-    }
-    uName=$(_jq '.username')
-    sName=$(_jq '.sanitized_nick')
+  _jq() {
+  echo ${row} | base64 --decode | jq -r ${1}
+}
+  uName=$(_jq '.username')
+  sName=$(_jq '.username_sanitized')
 	dTemplate=$(cat docker-compose.template | sed -e "s|##IMAGE##|$IMAGE|g" -e "s|##CB_USERNAME##|$uName|g" -e "s|##CLEAN_USERNAME##|$sName|g")
-   echo $(_jq '.username')
+  dOut="$dOut\n  $dTemplate"
+  echo $(_jq '.username')
 done
-#while read p; do
-#    nameMinusWorker=$(echo $p | sed 's|-worker||g')
-#    nameReplaceDash=$(echo $nameMinusWorker | sed 's|-|_|g')
-#    dTemplate=$(cat docker-compose.template | sed -e "s|##IMAGE##|$IMAGE|g" -e "s|##CB_USERNAME##|$nameReplaceDash|g" -e "s|##CLEAN_USERNAME##|$nameMinusWorker|g")
-#    #echo $nameReplaceDash
-#    dOut="$dOut\n  $dTemplate"
-#done < base_list.txt
     printf "version: '2'\nservices:$dOut" > docker-compose-generated.yml
     cat docker-compose-generated.yml
 #cd ../
