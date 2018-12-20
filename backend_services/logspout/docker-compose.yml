@@ -1,0 +1,24 @@
+version: '2'
+services:
+  logspout:
+    restart: always
+    #image: gliderlabs/logspout
+    #image: bekt/logspout-logstash
+    environment:
+      DEBUG: 'true'
+      ROUTE_URIS: 'logstash+udp://watcher4.backend.chaturbae.tv:12202?filter.name=*chaturbae*,syslog+tcp://syslog.backend.chaturbae.tv:514'
+    image: patt1293/logspout:latest
+    #environment:
+    #  ROUTE_URIS: "logstash://107.155.97.166:5001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.global: 'true'
+    tty: true
+    stdin_open: true
+    #command: 'multiline+raw://watcher5.backend.chaturbae.tv:12202?filter.name=*chaturbae*'
+    
+    #command: 'syslog+tcp://syslog.backend.chaturbae.tv:514'
+
+
