@@ -1,7 +1,7 @@
 version: '2'
 services:
     dropitella:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -16,7 +16,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     asuka-love:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -31,7 +31,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     prettyjulyxxx:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -46,7 +46,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     hotkateee:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -61,7 +61,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     luckysparkles:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -76,7 +76,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     ensaqwoien:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -91,7 +91,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     carlee-adams:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -106,7 +106,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     shannel-duperly:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -121,7 +121,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     chupika:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -136,7 +136,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     honey-pleasure:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -151,7 +151,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     heidi-klum18:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -166,7 +166,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     akyra-ebony:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -181,7 +181,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     graciesmall:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -196,7 +196,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     ready2learn:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -211,7 +211,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     offi-lilly:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -226,7 +226,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     aislynsweet:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -241,7 +241,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     samantha-delarosa:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -256,7 +256,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     kimdevine:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -271,7 +271,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     cinema-donna:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -286,7 +286,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     madison-hall:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
@@ -301,7 +301,7 @@ services:
         DECODE_JSON_LOGS: "false"
         DEBUG: "chaturbae:*"
     sofy9:
-      image: ''
+      image: 'patt1293/chaturbae-client:latest'
       labels:
         app: chaturbae:client
         io.rancher.container.hostname_override: container_name
