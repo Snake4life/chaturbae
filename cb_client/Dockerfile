@@ -108,7 +108,7 @@ RUN mkdir -p /var/log/chaturbae/
 
 RUN apt-get install nginx vim -y
 ADD nginx.conf /etc/nginx/sites-enabled/default
-
+RUN apt-get install -y jq
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -118,6 +118,7 @@ RUN groupadd -r chaturbae && useradd -r -g chaturbae -G audio,video chaturbae
 COPY package.json .
 
 RUN npm install pino
+
 
 # Bundle app source
 COPY . .

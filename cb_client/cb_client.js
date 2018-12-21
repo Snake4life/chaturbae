@@ -24,6 +24,8 @@ var ai_log = logger.child({ event: 'logging:chaturbae-ai' })
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
+var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 socket.on('connect', () => {
   server_log.info('connected to cb_server at http://localhost:8080');
   server_log.info(`got username from environment - ${USERNAME}`);
@@ -54,22 +56,38 @@ socket.on('room_leave', (e) => {
 });
 
 socket.on('tip', (e) => {
-  var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`})
-  var isOnline = spawn('node',  ['check_if_online.js', `${USERNAME}`]);
-  isOnline.on('close', function (code) {
-      if(code == 0){
-        inRoom=true
+
+  var datetime = (new Date).getTime();
+
+  //var child = spawn('bash', ['bash_scripts/all.sh', `${USERNAME}`, `${datetime}`])
+  //child.on('error', err => nudity_log.error('Error:', err));
+  //child.on('exit', (data) => {
+  var command = `bash bash_scripts/all.sh ${USERNAME} ${datetime}`
+    var child = exec(command,
+      function(error, stdout, stderr){
+        cb_room_log.info('all.sh exited, checking for return value')
+        var score = stdout.toString();
+        cb_room_log.info(`string score ${score}`);
+        score = score*100
+        cb_room_log.info(`string score * 100 - ${score}`);
+        nsfwScore = parseInt(score);
+        cb_room_log.info(`nsfwScore returned ${nsfwScore}`);
+        if(nsfwScore > 51){
+          cb_room_log.info(`nsfwScore > 51`);
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true'})
+        }
+        else{
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false'})
+        }
         cb_room_log.info(prettyjson.render(e))
         tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
         if(e.amount > 1000){
           socketIRC.emit('tip', e.user.username + ` tipped a LARGE amount - ${e.amount} -- http://www.chaturbate.com/${USERNAME}`);
         }
-      }
-      else{
-        inRoom=false
-        tip_log.info(`${USERNAME} is offline - check_if_online.js`)
-      }
-  });
+    });
+
+//  });
+
 });
 
 socket.on('room_message', (e) => {
@@ -107,7 +125,6 @@ else {
 //var minutes = 60, the_interval = minutes  * 1000;
 
 var firstNaked = 0;
-var spawn = require('child_process').spawn;
 setInterval(function() {
   var isOnline = spawn('node',  ['check_if_online.js', `${USERNAME}`]);
   isOnline.on('close', function (code) {
@@ -123,64 +140,41 @@ setInterval(function() {
   if(inRoom){
     var datetime = (new Date).getTime();
     //var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
-    var child = spawn('bash', ['bash_scripts/streamlink.sh', `${USERNAME}`, `${datetime}`])
+    var child = spawn('bash', ['bash_scripts/all.sh', `${USERNAME}`, `${datetime}`])
     child.on('error', err => nudity_log.error('Error:', err));
     child.on('exit', () => {
       nudity_log.info(`background nudity worker exited gracefully`);
-      child.stdout.on('data', data => nudity_log.info(data.toString()));
-      try {
-        var ffmpeg = spawn('bash', ['bash_scripts/ffmpeg.sh', `${USERNAME}`, `${datetime}`])
-        //var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
-        ffmpeg.on('error', err => nudity_log.info('Error:', err));
-        ffmpeg.on('exit', () => {
-          fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
-            //console.log(pIP);
-            const formData = {
-              file: fs.createReadStream(`${USERNAME}-${datetime}.jpg`)
-            }
-              request.post({
-                url: `http://${servicesIP}:5000`,
-                formData: formData
-              }, function callback(err, httpResponse, body) {
-                if (err) {
-                    ai_log.info('request failed:', err);
-                }
-                var response = JSON.parse(body);
-                //detect_nudity_debug(prettyjson.render(response))
-                nsfwScore = response.score * 100
-                ai_log.info(`AI Detected a NSFW Score of ${nsfwScore}%`);
-                if(nsfwScore > 51){
-                  naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`});
-                  naked_logger.info(`${USERNAME} appears to be naked`);
-                  if(firstNaked < 1){
-                    ai_log.info(`First time seen naked: ${firstNaked}`);
-                    var roundedPercent = " artificial inteligance suggests she's "
-                  socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+Math.round(nsfwScore)+"% naked");
-                  }
-                  else{
-                    //ai_log.child({ is_naked: 'false' })
-                    ai_log.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
-                  }
-                  firstNaked += 1;
-                }
-                else{
-                  not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' });
-                  not_naked_logger.info(`${USERNAME} does not appear to be naked`);
-                  if(firstNaked > 10){
-                      ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
-                    firstNaked = 0;
-                  }
-                }
-              });
-          });
-        });
-        ffmpeg.stdout.on('data', data => nudity_log.info(data.toString()));
-      } catch (e) {
-        nudity_log.error('Cannot kill process');
-      }
+      child.stdout.on('data', (data) => {
+        score = data.toString();
+        score = score*100
+        nsfwScore = parseInt(score);
+        ai_log.info(`AI Detected a NSFW Score of ${nsfwScore}%`);
+        if(nsfwScore > 51){
+          naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`});
+          naked_logger.info(`${USERNAME} appears to be naked`);
+          if(firstNaked < 1){
+            ai_log.info(`First time seen naked: ${firstNaked}`);
+            var roundedPercent = " artificial inteligance suggests she's "
+          socketIRC.emit('naked', USERNAME + " APPEARS TO BE NAKED!!!!! http://www.chaturbate.com/"+USERNAME+" artificial inteligance suggests she's "+nsfwScore+"% naked");
+          }
+          else{
+            //ai_log.child({ is_naked: 'false' })
+            ai_log.info(`${USERNAME} - Seen naked recently: ${firstNaked}`);
+          }
+          firstNaked += 1;
+        }
+        else{
+          not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' });
+          not_naked_logger.info(`${USERNAME} does not appear to be naked`);
+          if(firstNaked > 10){
+              ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
+            firstNaked = 0;
+          }
+        }
+      });
+      //child.stdout.on('data', data => nudity_log.info(data));
     });
-  }
-  else{
+ } else {
     cb_room_log.info(`${USERNAME} does not appear to be in her room`)
   }
   }, the_interval);
