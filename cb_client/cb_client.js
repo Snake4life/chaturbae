@@ -123,7 +123,6 @@ setInterval(function() {
         ffmpeg.on('error', err => nudity_log.info('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
-              ai_debug('pip' + pIP)
             //console.log(pIP);
             const formData = {
               file: fs.createReadStream(`${USERNAME}-${datetime}.jpg`)
@@ -133,8 +132,7 @@ setInterval(function() {
                 formData: formData
               }, function callback(err, httpResponse, body) {
                 if (err) {
-                    ai_debug('request failed:', err);
-                    return;
+                    ai_log.info('request failed:', err);
                 }
                 var response = JSON.parse(body);
                 //detect_nudity_debug(prettyjson.render(response))
