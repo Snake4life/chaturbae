@@ -54,12 +54,22 @@ socket.on('room_leave', (e) => {
 });
 
 socket.on('tip', (e) => {
-  cb_room_log.info(prettyjson.render(e))
   var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`})
-  tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
-  if(e.amount > 1000){
-    socketIRC.emit('tip', e.user.username + ` tipped a LARGE amount - ${e.amount} -- http://www.chaturbate.com/${USERNAME}`);
-  }
+  var isOnline = spawn('node',  ['check_if_online.js', `${USERNAME}`]);
+  isOnline.on('close', function (code) {
+      if(code == 0){
+        inRoom=true
+        cb_room_log.info(prettyjson.render(e))
+        tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
+        if(e.amount > 1000){
+          socketIRC.emit('tip', e.user.username + ` tipped a LARGE amount - ${e.amount} -- http://www.chaturbate.com/${USERNAME}`);
+        }
+      }
+      else{
+        inRoom=false
+        tip_log.info(`${USERNAME} is offline - check_if_online.js`)
+      }
+  });
 });
 
 socket.on('room_message', (e) => {
