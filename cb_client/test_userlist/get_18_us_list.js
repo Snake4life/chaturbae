@@ -11,9 +11,8 @@ request(url, function(error, response, html){
       const $ = cheerio.load(html);
       var count = 0;
       $('li.room_list_room').each(function(elem){
-        //if(count < 50){
+        if(count < 4){
         var username = $(this).attr('data-sl');
-
         var noLeading = username.replace(pattern, '');
         var noUnder = noLeading.replace(/_/g, '-')
         var noDouble = noUnder.replace(/--/g, '-');
@@ -21,12 +20,10 @@ request(url, function(error, response, html){
         //console.log(result).
         userList.push({username: `${username}`, username_sanitized: `${noPost}`})
         //console.log(`${username} ${noPost}`);
-        //count = count + 1
-      //} else {
-    // userList = userList.slice(10, userList.length);
+        count = count + 1
+      } else {
+        userList = userList.slice(1, userList.length);
 
-
-      //}
       });
       console.log(JSON.stringify(userList))
       process.exit(0);
