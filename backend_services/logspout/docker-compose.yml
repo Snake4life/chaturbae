@@ -17,6 +17,3 @@ services:
       io.rancher.scheduler.global: 'true'
     tty: true
     stdin_open: true
-    #command: 'multiline+raw://watcher5.backend.chaturbae.tv:12202?filter.name=*chaturbae*'
-
-    #command: 'syslog+tcp://syslog.backend.chaturbae.tv:514'
