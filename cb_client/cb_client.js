@@ -19,8 +19,8 @@ var pIP = ""
 var logger = require('pino')()
 var server_log = logger.child({ event: 'logging:chaturbae-client' })
 var cb_room_log = logger.child({ event: 'logging:chaturbae-room', cb_username: USERNAME})
-var nudity_log = logger.child({ event: 'logging:chaturbae-nude}' })
-var ai_log = logger.child({ event: 'logging:chaturbae-nude' })
+var nudity_log = logger.child({ event: 'logging:chaturbae-nude' })
+var ai_log = logger.child({ event: 'logging:chaturbae-ai' })
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
