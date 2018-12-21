@@ -23,7 +23,7 @@ request(url, function(error, response, html){
         count = count + 1
       } else {
         userList = userList.slice(1, userList.length);
-
+      }
       });
       console.log(JSON.stringify(userList))
       process.exit(0);
