@@ -2,7 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 const username = process.argv[2];
 var pattern = /^_/g;
-const url = 'https://chaturbate.com/female-cams/?keywords=&page=2';
+const url = 'https://chaturbate.com/female-cams/?keywords=&page=3';
 var dashRxp = new RegExp("^_", "g");
 request(url, function(error, response, html){
   var userList = []
@@ -11,7 +11,7 @@ request(url, function(error, response, html){
       const $ = cheerio.load(html);
       var count = 0;
       $('li.room_list_room').each(function(elem){
-        if(count < 15){
+        if(count < 10){
         var username = $(this).attr('data-sl');
 
         var noLeading = username.replace(pattern, '');
