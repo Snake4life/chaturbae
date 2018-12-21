@@ -74,7 +74,7 @@ socket.on('tip', (e) => {
         cb_room_log.info(`nsfwScore returned ${nsfwScore}`);
         if(nsfwScore > 51){
           cb_room_log.info(`nsfwScore > 51`);
-          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true'})
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true', nsfw_score: nsfwScore})
         }
         else{
           var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false'})
