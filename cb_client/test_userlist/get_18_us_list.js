@@ -11,7 +11,7 @@ request(url, function(error, response, html){
       const $ = cheerio.load(html);
       var count = 0;
       $('li.room_list_room').each(function(elem){
-        if(count < 10){
+        if(count < 20){
         var username = $(this).attr('data-sl');
 
         var noLeading = username.replace(pattern, '');
