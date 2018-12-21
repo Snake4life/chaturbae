@@ -21,10 +21,9 @@ request(url, function(error, response, html){
         userList.push({username: `${username}`, username_sanitized: `${noPost}`})
         //console.log(`${username} ${noPost}`);
         count = count + 1
-      } else {
-        userList = userList.slice(1, userList.length);
       }
       });
+      userList = userList.slice(1, userList.length);
       console.log(JSON.stringify(userList))
       process.exit(0);
     }
