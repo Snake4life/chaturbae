@@ -123,13 +123,14 @@ setInterval(function() {
   if(inRoom){
     var datetime = (new Date).getTime();
     //var child = spawn('streamlink', ['-Q', `http://www.chaturbate.com/${USERNAME}`, 'best', '-o', `${USERNAME}-${datetime}.mkv`], {detached: true});
-    var child = spawn('bash', ['streamlink.sh', `${USERNAME}`, `${datetime}`])
+    var child = spawn('bash', ['bash_scripts/streamlink.sh', `${USERNAME}`, `${datetime}`])
     child.on('error', err => nudity_log.error('Error:', err));
     child.on('exit', () => {
       nudity_log.info(`background nudity worker exited gracefully`);
       child.stdout.on('data', data => nudity_log.info(data.toString()));
       try {
-        var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
+        var ffmpeg = spawn('bash', ['bash_scripts/ffmpeg.sh', `${USERNAME}`, `${datetime}`])
+        //var ffmpeg = spawn('ffmpeg', ['-ss', '00:00:01', '-i', `${USERNAME}-${datetime}.mkv`, '-vframes', '1', '-q:v', `2`, `${USERNAME}-${datetime}.jpg`]);
         ffmpeg.on('error', err => nudity_log.info('Error:', err));
         ffmpeg.on('exit', () => {
           fs.readFile(`${USERNAME}-${datetime}.jpg`, function (err, data) {
@@ -148,8 +149,6 @@ setInterval(function() {
                 //detect_nudity_debug(prettyjson.render(response))
                 nsfwScore = response.score * 100
                 ai_log.info(`AI Detected a NSFW Score of ${nsfwScore}%`);
-                fs.unlinkSync(`${USERNAME}-${datetime}.mkv`)
-                fs.unlinkSync(`${USERNAME}-${datetime}.jpg`)
                 if(nsfwScore > 51){
                   naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`});
                   naked_logger.info(`${USERNAME} appears to be naked`);

@@ -58,3 +58,5 @@ typings/
 # dotenv environment variables file
 .env
 flask-bootstrap-boilerplate
+
+docker-compose-generated.yml

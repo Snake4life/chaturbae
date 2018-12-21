@@ -8,8 +8,8 @@ function finish {
 }
 trap finish EXIT
 
-streamlink -Q "http://www.chaturbate.com/${USERNAME}" 480p -o "${USERNAME}-${datetime}.mkv" &
+streamlink -Q "http://www.chaturbate.com/${USERNAME}" worst -o "${USERNAME}-${datetime}.mkv" &
 pid=$!
 
-sleep "5"
+sleep "3"
 finish
