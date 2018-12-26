@@ -12,15 +12,15 @@ var server_debug = require('debug')('chaturbae:server')
 var cb_room_debug = require('debug')('chaturbae:room')
 var detect_nudity_debug = require('debug')('chaturbae:nude')
 var ai_debug = require('debug')('chaturbae:ai')
-var USERNAME = process.env.CB_USERNAME;
+var USERNAME = process.env.MODEL_USERNAME;
 var AWSKEY = process.env.AWSKEY
 var AWSSECRET = process.env.AWSSECRET
 var pIP = ""
 var logger = require('pino')()
-var server_log = logger.child({ event: 'logging:chaturbae-client' })
-var cb_room_log = logger.child({ event: 'logging:chaturbae-room', cb_username: USERNAME})
-var nudity_log = logger.child({ event: 'logging:chaturbae-nude' })
-var ai_log = logger.child({ event: 'logging:chaturbae-ai' })
+var server_log = logger.child({ event: 'logging:chaturbae-client', site: 'chaturbate', model_username: `${USERNAME}` })
+var cb_room_log = logger.child({ event: 'logging:chaturbae-room', site: 'chaturbate', model_username: `${USERNAME}` })
+var nudity_log = logger.child({ event: 'logging:chaturbae-nude', site: 'chaturbate', model_username: `${USERNAME}` })
+var ai_log = logger.child({ event: 'logging:chaturbae-ai', site: 'chaturbate', model_username: `${USERNAME}` })
 AWS.config.update({ accessKeyId: `${AWSKEY}`, secretAccessKey: `${AWSSECRET}` });
 var s3 = new AWS.S3();
 var s3_bucket = "chaturbae-images"
@@ -74,10 +74,10 @@ socket.on('tip', (e) => {
         cb_room_log.info(`nsfwScore returned ${nsfwScore}`);
         if(nsfwScore > 51){
           cb_room_log.info(`nsfwScore > 51`);
-          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true', nsfw_score: nsfwScore})
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true', nsfw_score: nsfwScore, site: 'chaturbate', model_username: `${USERNAME}`})
         }
         else{
-          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false'})
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false', site: 'chaturbate', model_username: `${USERNAME}`})
         }
         cb_room_log.info(prettyjson.render(e))
         tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
@@ -91,7 +91,7 @@ socket.on('tip', (e) => {
 });
 
 socket.on('room_message', (e) => {
-  cb_chat_log = logger.child({ event: 'logging:chaturbae-message', chat_user: `${e.user.username}`, cb_username: `${USERNAME}` })
+  cb_chat_log = logger.child({ event: 'logging:chaturbae-message', chat_user: `${e.user.username}`, site: 'chaturbate', model_username: `${USERNAME}` })
   cb_chat_log.info(`${e.message}`);
 
 });
@@ -150,7 +150,7 @@ setInterval(function() {
         nsfwScore = parseInt(score);
         ai_log.info(`AI Detected a NSFW Score of ${nsfwScore}%`);
         if(nsfwScore > 51){
-          naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`});
+          naked_logger = logger.child({event: 'logging:chaturbae-naked', is_naked: 'true', nsfw_score: `${nsfwScore}`, site: 'chaturbate', model_username: `${USERNAME}` });
           naked_logger.info(`${USERNAME} appears to be naked`);
           if(firstNaked < 1){
             ai_log.info(`First time seen naked: ${firstNaked}`);
@@ -164,7 +164,7 @@ setInterval(function() {
           firstNaked += 1;
         }
         else{
-          not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' });
+          not_naked_logger = logger.child({event: 'logging:chaturbae-not-naked', is_naked: 'false' , site: 'chaturbate', model_username: `${USERNAME}` });
           not_naked_logger.info(`${USERNAME} does not appear to be naked`);
           if(firstNaked > 10){
               ai_log.info(`irc post timeout reached for ${USERNAME}. Resetting counter`);
