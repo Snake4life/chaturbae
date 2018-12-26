@@ -15,7 +15,7 @@ for row in $(echo "${sample}" | jq -r '.[] | @base64'); do
 }
   uName=$(_jq '.username')
   sName=$(_jq '.username_sanitized')
-	dTemplate=$(cat ../docker-compose.template | sed -e "s|##IMAGE##|$IMAGE|g" -e "s|##CB_USERNAME##|$uName|g" -e "s|##CLEAN_USERNAME##|$sName|g")
+	dTemplate=$(cat ../docker-compose.template | sed -e "s|##IMAGE##|$IMAGE|g" -e "s|##MODEL_USERNAME##|$uName|g" -e "s|##CLEAN_USERNAME##|$sName|g")
   dOut="$dOut\n  $dTemplate"
   echo $(_jq '.username')
 done
