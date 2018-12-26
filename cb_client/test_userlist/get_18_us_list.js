@@ -2,7 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 const username = process.argv[2];
 var pattern = /^_/g;
-const url = 'https://chaturbate.com/female-cams/';
+const url = 'https://chaturbate.com/female-cams/?page=2';
 var dashRxp = new RegExp("^_", "g");
 request(url, function(error, response, html){
   var userList = []
