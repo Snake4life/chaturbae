@@ -77,7 +77,7 @@ socket.on('tip', (e) => {
           var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'true', nsfw_score: nsfwScore, site: 'chaturbate', model_username: `${USERNAME}`})
         }
         else{
-          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false', site: 'chaturbate', model_username: `${USERNAME}`})
+          var tip_log = logger.child({ event: 'logging:chaturbae-tip', tip_amount: parseInt(e.amount), tipper: `${e.user.username}`, is_naked: 'false', site: 'chaturbate', model_username: `${USERNAME}`, nsfw_score: nsfwScore})
         }
         cb_room_log.info(prettyjson.render(e))
         tip_log.info(`${e.user.username} tipped ${e.amount} tokens`);
