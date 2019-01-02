@@ -1,9 +1,8 @@
 version: '2'
 services:
   elk:
-    #build: .
     labels:
-      io.rancher.scheduler.affinity:host_label: funct=elk
+      io.rancher.scheduler.affinity:host_label: service=elk
     image: patt1293/elk-docker
     ports:
       - "5601:5601"
