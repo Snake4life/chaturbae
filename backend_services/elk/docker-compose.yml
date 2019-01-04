@@ -14,3 +14,33 @@ services:
       - "12202:12202/udp"
     volumes:
       - /home/elasticsearch:/var/lib/elasticsearch
+      
+  app:
+    image: patt1293/cambae-backend-api:latest
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    environment:
+      ENV: local
+      SECRET_KEY: eEnbvGyk]Y8R/BgU
+      SQLALCHEMY_DATABASE_URI_TEST: 'postgresql+psycopg2://tester:12345@db/flaskdb_test'
+      FLASK_APP: autoapp.py
+      FLASK_DEBUG: 1
+
+  db:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/data/db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_USER: tester
+      POSTGRES_DB: flaskdb
+
+volumes:
+  db-data:
