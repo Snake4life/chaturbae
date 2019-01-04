@@ -2,8 +2,7 @@ version: '2'
 services:
   irc-nsfw-api-lb:
     labels:
-      io.rancher.scheduler.affinity:host_label: service=watcher
-      io.rancher.scheduler.affinity:host_label_soft: service=elk
+      io.rancher.scheduler.global: 'true'
     ports:
     - 5000
     - 8081
