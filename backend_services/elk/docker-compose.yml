@@ -14,13 +14,13 @@ services:
       - "12202:12202/udp"
     volumes:
       - /home/elasticsearch:/var/lib/elasticsearch
-      
+
   app:
     image: patt1293/cambae-backend-api:latest
     volumes:
       - ./:/usr/src/app
     ports:
-      - 5000:5000
+      - 6901:6901
     depends_on:
       - db
     environment:
