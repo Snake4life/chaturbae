@@ -2,6 +2,13 @@ version: '2'
 services:
   irc-nsfw-api-lb:
     lb_config:
+      config: |-
+          global
+              maxconn 4096
+              maxpipes 1024
+          defaults
+              timeout client 36000s
+              timeout server 36000s
       port_rules:
       - source_port: 5000
         target_port: 5000
