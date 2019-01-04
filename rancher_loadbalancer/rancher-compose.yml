@@ -1,7 +1,6 @@
 version: '2'
 services:
   irc-nsfw-api-lb:
-    scale: 3
     lb_config:
       port_rules:
       - source_port: 5000
