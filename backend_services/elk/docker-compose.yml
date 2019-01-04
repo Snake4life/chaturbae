@@ -19,8 +19,8 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: service=elk
     image: patt1293/cambae-backend-api:latest
-    volumes:
-      - ./:/usr/src/app
+    #volumes:
+    #  - ./:/usr/src/app
     ports:
       - 6901
     depends_on:
