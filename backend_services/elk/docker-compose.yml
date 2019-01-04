@@ -22,7 +22,7 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 6901:6901
+      - 6902:6901
     depends_on:
       - db
     environment:
