@@ -4,4 +4,5 @@ services:
     ports:
     - 5000
     - 8081
+    - 6901
     image: rancher/lb-service-haproxy:latest

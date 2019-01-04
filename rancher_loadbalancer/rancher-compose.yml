@@ -10,6 +10,9 @@ services:
       - source_port: 8081
         target_port: 8081
         service: chaturbae-irc-nudeapi/irc-worker
+      - source_port: 6901
+        target_port: 6901
+        service: chaturbae-irc-nudeapi/app
     health_check:
       port: 42
       interval: 2000
