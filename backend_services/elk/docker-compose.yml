@@ -16,6 +16,8 @@ services:
       - /home/elasticsearch:/var/lib/elasticsearch
 
   app:
+    labels:
+      io.rancher.scheduler.affinity:host_label: service=elk
     image: patt1293/cambae-backend-api:latest
     volumes:
       - ./:/usr/src/app
@@ -31,6 +33,8 @@ services:
       FLASK_DEBUG: 1
 
   db:
+    labels:
+      io.rancher.scheduler.affinity:host_label: service=elk
     image: postgres:alpine
     ports:
       - 5432:5432
